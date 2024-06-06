@@ -71,10 +71,10 @@
     <script>
         const items = [
             { name: "Majestic", probability: 0.1 },   // 0.1%
-            { name: "Legendary", probability: 11 },   // 11%
+            { name: "Legendary", probability: 40 },   // 40%
             { name: "Heroic", probability: 4 },       // 4%
             { name: "Mythic", probability: 2 },       // 2%
-            { name: "Epic", probability: 82.9 }       // 82.9%
+            { name: "Epic", probability: 53.9 }       // 53.9%
         ];
 
         function getRandomItem() {
@@ -90,4 +90,15 @@
 
         document.getElementById("gachaButton").addEventListener("click", function() {
             const capsule = document.getElementById("capsule");
-            const gachaResult = document.getElementById
+            const gachaResult = document.getElementById("gachaResult");
+            const selectedItem = getRandomItem();
+
+            capsule.style.animation = "openCapsule 1s ease-in-out";
+            setTimeout(() => {
+                gachaResult.textContent = "結果: " + selectedItem;
+                gachaResult.style.animation = "showItem 1s ease-in-out forwards";
+            }, 1000); // Delay to match the capsule animation
+        });
+    </script>
+</body>
+</html>
