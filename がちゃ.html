@@ -21,17 +21,60 @@
             font-size: 1.2em;
             cursor: pointer;
         }
+        .capsule {
+            margin: 20px auto;
+            width: 100px;
+            height: 100px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+            position: relative;
+            animation: none;
+        }
+        .capsule::before, .capsule::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+        }
+        .capsule::before {
+            top: -25px;
+        }
+        .capsule::after {
+            bottom: -25px;
+        }
+        @keyframes openCapsule {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes showItem {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .item {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #007bff;
+            opacity: 0;
+            animation: none;
+        }
     </style>
 </head>
 <body>
     <h1>ガチャガチャ</h1>
     <button id="gachaButton">ガチャを引く</button>
-    <div id="gachaResult"></div>
+    <div id="capsule" class="capsule"></div>
+    <div id="gachaResult" class="item"></div>
 
     <script>
         const items = [
-            { name: "Majestic", probability: 0.1 },  // 0.1%
-            { name: "Epic", probability: 99.9 }      // 99.9%
+            { name: "Majestic", probability: 0.1 },   // 0.1%
+            { name: "Legendary", probability: 11 },   // 11%
+            { name: "Heroic", probability: 4 },       // 4%
+            { name: "Mythic", probability: 2 },       // 2%
+            { name: "Epic", probability: 82.9 }       // 82.9%
         ];
 
         function getRandomItem() {
@@ -46,9 +89,5 @@
         }
 
         document.getElementById("gachaButton").addEventListener("click", function() {
-            const selectedItem = getRandomItem();
-            document.getElementById("gachaResult").textContent = "結果: " + selectedItem;
-        });
-    </script>
-</body>
-</html>
+            const capsule = document.getElementById("capsule");
+            const gachaResult = document.getElementById
