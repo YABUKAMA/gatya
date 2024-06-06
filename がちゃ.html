@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ガチャガチャ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        #gachaResult {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #007bff;
+        }
+        #gachaButton {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>ガチャガチャ</h1>
+    <button id="gachaButton">ガチャを引く</button>
+    <div id="gachaResult"></div>
+
+    <script>
+        const items = [
+            { name: "Majestic", probability: 0.1 },  // 0.1%
+            { name: "Epic", probability: 99.9 }      // 99.9%
+        ];
+
+        function getRandomItem() {
+            const randomNumber = Math.random() * 100; // 0 to 99.9999
+            let sum = 0;
+            for (let i = 0; i < items.length; i++) {
+                sum += items[i].probability;
+                if (randomNumber < sum) {
+                    return items[i].name;
+                }
+            }
+        }
+
+        document.getElementById("gachaButton").addEventListener("click", function() {
+            const selectedItem = getRandomItem();
+            document.getElementById("gachaResult").textContent = "結果: " + selectedItem;
+        });
+    </script>
+</body>
+</html>
